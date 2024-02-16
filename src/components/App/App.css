@@ -1,0 +1,13 @@
+/* App.css */
+.todo-item, .form-inline, .btn-group {
+    width: 100%;
+  }
+  
+  .form-inline input[type="text"] {
+    width: 75%;
+  }
+  
+  .form-inline button {
+    width: 24%;
+  }
+  
