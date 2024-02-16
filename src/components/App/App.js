@@ -12,17 +12,14 @@ const initialState = {
 };
 
 function App() {
-  const [state, dispatch] = useReducer(todoReducer, initialState, () => {
-    const localData = localStorage.getItem('todos');
-    return localData ? JSON.parse(localData) : initialState;
-  });
+  // жесткий useReducer
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(state));
-  }, [state]);
+    //
+  }, []);
 
   return (
-    <TodoContext.Provider value={{ state, dispatch }}>
+    <TodoContext.Provider value={value}>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">

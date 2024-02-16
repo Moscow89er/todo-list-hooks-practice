@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
-import { TodoContext } from './TodoContext';
+import React from 'react';
 
 function TodoItem({ todo }) {
-  const { dispatch } = useContext(TodoContext);
   
   const toggleTodo = () => {
-    dispatch({ type: 'TOGGLE_TODO', payload: todo.id });
+    //
   };
 
   return (
@@ -14,7 +12,7 @@ function TodoItem({ todo }) {
         <input className="form-check-input me-2" type="checkbox" checked={todo.completed} onChange={toggleTodo} />
         {todo.text}
       </div>
-      <button onClick={() => dispatch({ type: 'REMOVE_TODO', payload: todo.id })} className="btn btn-danger btn-sm">Удалить</button>
+      <button onClick={() => {}} className="btn btn-danger btn-sm">Удалить</button>
     </li>
   );
 }
