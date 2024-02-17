@@ -5,8 +5,8 @@ function AddTodoForm({ onDispatch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onDispatch({ type: 'ADD_TODO', payload: inputTodo.current.value });
-    console.log(inputTodo.current.value);
+    inputTodo.current.value && onDispatch({ type: 'ADD_TODO', payload: inputTodo.current.value });
+    inputTodo.current.value = "";
   };
 
   return (

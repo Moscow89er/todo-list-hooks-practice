@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
-// import { TodoContext } from '../TodoContext';
+import { TodoContext } from '../TodoContext';
 import todoReducer from '../../utils/todoReducer';
 import TodoList from '../TodoList';
 import AddTodoForm from '../AddTodoForm';
@@ -19,13 +19,14 @@ function App() {
     return localTodo ? JSON.parse(localTodo) : initialState;
   });
 
+  console.log(state);
 
   useEffect(() => {
     //
   }, []);
 
   return (
-    
+    <TodoContext.Provider value={{ state, dispatch }}>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -35,8 +36,8 @@ function App() {
             <TodoList todos={state.todos}/>
           </div>
         </div>
-    </div>
-  
+      </div>
+    </TodoContext.Provider>
   );
 }
 

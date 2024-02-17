@@ -7,7 +7,8 @@ function todoReducer(state, action) {
       };
     case 'REMOVE_TODO':
       return {
-        //
+        ...state,
+        todos: state.todos.filter(todo => todo.id !== action.payload)
       };
     case 'SET_FILTER':
       return {
@@ -15,7 +16,8 @@ function todoReducer(state, action) {
       };
     case 'TOGGLE_TODO':
       return {
-        //
+        ...state,
+        todos: state.todos.map(todo => todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo)
       };
     default:
       return state;
