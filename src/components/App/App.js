@@ -1,5 +1,5 @@
-import React, { useReducer, useEffect } from 'react';
-import { TodoContext } from '../TodoContext';
+import React, { useEffect, useReducer } from 'react';
+// import { TodoContext } from '../TodoContext';
 import todoReducer from '../../utils/todoReducer';
 import TodoList from '../TodoList';
 import AddTodoForm from '../AddTodoForm';
@@ -13,24 +13,30 @@ const initialState = {
 
 function App() {
   // жесткий useReducer
+  const [state, dispatch] = useReducer(todoReducer, initialState, (initialState) => {
+    const localTodo = localStorage.getItem("todo");
+
+    return localTodo ? JSON.parse(localTodo) : initialState;
+  });
+
 
   useEffect(() => {
     //
   }, []);
 
   return (
-    <TodoContext.Provider value={value}>
+    
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
             <h1 className="text-center mb-4">Список дел</h1>
-            <AddTodoForm />
+            <AddTodoForm onDispatch={dispatch}/>
             <Filter />
-            <TodoList />
+            <TodoList todos={state.todos}/>
           </div>
         </div>
     </div>
-  </TodoContext.Provider>
+  
   );
 }
 

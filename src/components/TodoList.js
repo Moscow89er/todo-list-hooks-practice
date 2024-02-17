@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
-import { TodoContext } from './TodoContext';
+import React, { useContext, useState } from 'react';
+// import { TodoContext } from './TodoContext';
 import TodoItem from './TodoItem';
 
-function TodoList() {
-  const { state } = useContext(TodoContext);
+function TodoList({todos}) {
+  // const { state } = useContext(TodoContext);
   
   // логика фильтрации filtedTodo
 
+  // const [filteredTodos, setFilteredTodos] = useState([{id: 1, text: "test", completed: true}, {id: 2, text: "test", completed: false}]);
+
   return (
     <ul className="list-group">
-      {filteredTodos.map(todo => (
+      {todos.map(todo => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
     </ul>
