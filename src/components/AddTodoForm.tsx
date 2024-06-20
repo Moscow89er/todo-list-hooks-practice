@@ -1,17 +1,21 @@
-import React, { useState, useContext, useRef } from 'react';
-import { TodoContext } from './TodoContext';
+import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { ADD_TODO } from '../utils/actionTypes';
+import { AppDispatch } from '../store/store';
 
-function AddTodoForm() {
+const AddTodoForm: React.FC = () => {
   const [text, setText] = useState('');
-  const { dispatch } = useContext(TodoContext);
-  const inputRef = useRef();
+  const dispatch = useDispatch<AppDispatch>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) return;
-    dispatch({ type: 'ADD_TODO', payload: text });
+    dispatch({ type: ADD_TODO, payload: text });
     setText('');
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   return (
