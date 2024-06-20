@@ -23,6 +23,7 @@ function AddTodoForm() {
         onChange={(e) => setText(e.target.value)}
         placeholder="Add new todo"
         className="form-control mr-2"
+        style={{ width: "74%" }}
       />
       <button type="submit" className="btn btn-primary">Добавить</button>
     </form>
