@@ -1,16 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import { useAppSelector } from '../hooks/hooks';
 import TodoItem from './TodoItem';
 
 const TodoList: React.FC = () => {
-  const todos = useSelector((state: RootState) => state.todos);
-  const filter = useSelector((state: RootState) => state.filter);
-
-  if (!Array.isArray(todos)) {
-    console.error('Expected todos to be an array, but got:', todos);
-    return null;
-  }
+  const todos = useAppSelector(state => state.todos.todos);
+  const filter = useAppSelector(state => state.todos.filter);
 
   const filteredTodos = todos.filter(todo => {
     switch (filter) {

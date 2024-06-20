@@ -7,7 +7,7 @@ import Filter from '../Filter';
 import './App.css';
 
 const App: React.FC = () => {
-  const todos = useSelector((state: RootState) => state.todos);
+  const todos = useSelector((state: RootState) => state.todos.todos);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
