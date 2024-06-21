@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks/hooks';
 import { RootState } from '../../store/store';
 import TodoList from '../TodoList';
 import AddTodoForm from '../AddTodoForm';
@@ -7,7 +7,7 @@ import Filter from '../Filter';
 import './App.css';
 
 const App: React.FC = () => {
-  const todos = useSelector((state: RootState) => state.todos.todos);
+  const todos = useAppSelector((state: RootState) => state.todos.todos);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));

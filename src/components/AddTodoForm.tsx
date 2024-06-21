@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useAppDispatch } from '../hooks/hooks';
-import { addTodo } from '../store/todoSlice';
+import { addTodo } from '../utils/actions';
 
 const AddTodoForm: React.FC = () => {
   const [text, setText] = useState('');

@@ -1,5 +1,6 @@
-import { TodoState } from './types';
-import { TodoActionTypes, ADD_TODO, REMOVE_TODO, SET_FILTER, TOGGLE_TODO, SET_TODOS } from './actionTypes';
+import { TodoState, Todo } from './types';
+import { createReducer, PayloadAction } from '@reduxjs/toolkit';
+import { addTodo, removeTodo, toggleTodo, setFilter, setTodos, setTodoDeadline } from './actions';
 
 const loadInitialState = (): TodoState => {
   const localData = localStorage.getItem('todos');
@@ -24,43 +25,42 @@ const loadInitialState = (): TodoState => {
 
 const initialState: TodoState = loadInitialState();
 
-function todoReducer(state = initialState, action: TodoActionTypes): TodoState {
-  switch (action.type) {
-    case ADD_TODO:
-      return {
-        ...state,
-        todos: [...state.todos, { id: Date.now(), text: action.payload, completed: false }],
-      };
-    case REMOVE_TODO:
-      return {
-        ...state,
-        todos: state.todos.filter(todo => todo.id !== action.payload),
-      };
-    case SET_FILTER:
-      return {
-        ...state,
-        filter: action.payload,
-      };
-    case TOGGLE_TODO:
-      return {
-        ...state,
-        todos: state.todos.map(todo =>
-          todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo
-        ),
-      };
-    case SET_TODOS:
-      if (Array.isArray(action.payload)) {
-        return {
-          ...state,
-          todos: action.payload,
-        };
-      } else {
-        console.error('Expected payload to be an array, but got:', action.payload);
-        return state;
+const todoReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(addTodo, (state, action: PayloadAction<string>) => {
+      state.todos.push({ id: Date.now(), text: action.payload, completed: false });
+    })
+    .addCase(removeTodo, (state, action: PayloadAction<number>) => {
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
+    })
+    .addCase(toggleTodo, (state, action: PayloadAction<number>) => {
+      const todo = state.todos.find(todo => todo.id === action.payload);
+      if (todo) {
+        todo.completed = !todo.completed;
       }
-    default:
-      return state;
-  }
-}
+    })
+    .addCase(setFilter, (state, action: PayloadAction<string>) => {
+      state.filter = action.payload;
+    })
+    .addCase(setTodos, (state, action: PayloadAction<Todo[]>) => {
+      state.todos = action.payload;
+    })
+    .addCase(setTodoDeadline, (state, action: PayloadAction<{ id: number; deadline: Date }>) => {
+      const todo = state.todos.find(todo => todo.id === action.payload.id);
+      if (todo) {
+        todo.deadline = action.payload.deadline;
+      }
+    })
+    // .addCase(fetchTodos.pending, (state) => {
+    //   console.log('Fetching todos...');
+    // })
+    // .addCase(fetchTodos.fulfilled, (state, action: PayloadAction<Todo[]>) => {
+    //   state.todos = action.payload;
+    //   console.log('Fetched todos successfully');
+    // })
+    // .addCase(fetchTodos.rejected, (state, action) => {
+    //   console.error('Failed to fetch todos:', action.error.message);
+    // });
+});
 
 export default todoReducer;

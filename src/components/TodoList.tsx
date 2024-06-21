@@ -1,12 +1,14 @@
 import React from 'react';
-import { useAppSelector } from '../hooks/hooks';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 import TodoItem from './TodoItem';
+import { Todo } from '../utils/types';
 
 const TodoList: React.FC = () => {
-  const todos = useAppSelector(state => state.todos.todos);
-  const filter = useAppSelector(state => state.todos.filter);
+  const todos = useSelector((state: RootState) => state.todos.todos);
+  const filter = useSelector((state: RootState) => state.todos.filter);
 
-  const filteredTodos = todos.filter(todo => {
+  const filteredTodos = todos.filter((todo: Todo) => {
     switch (filter) {
       case 'active':
         return !todo.completed;
@@ -19,7 +21,7 @@ const TodoList: React.FC = () => {
 
   return (
     <ul className="list-group">
-      {filteredTodos.map(todo => (
+      {filteredTodos.map((todo: Todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
     </ul>

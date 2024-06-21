@@ -1,10 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setFilter } from '../store/todoSlice';
-import { AppDispatch } from '../store/store';
+import { useAppDispatch } from '../hooks/hooks';
+import { setFilter } from '../utils/actions';
 
 const Filter: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   return (
     <div className="btn-group mb-3" role="group" aria-label="Basic example">
