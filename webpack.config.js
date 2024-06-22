@@ -10,30 +10,20 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'babel-loader',
-      },
-      {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
     ],
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 9000,
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -41,4 +31,12 @@ module.exports = {
       template: './public/index.html',
     }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    port: 9000,
+    open: true,
+  },
 };

@@ -1,20 +1,19 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "lib": ["dom", "dom.iterable", "esnext"],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true,
-      "jsx": "react-jsx"
-    },
-    "include": ["src"]
-  }
-  
+  "compilerOptions": {
+    "target": "es5",                          // Версия ECMAScript, в которую будет компилироваться TypeScript
+    "module": "commonjs",                     // Система модулей
+    "strict": true,                           // Включает строгую проверку типов
+    "esModuleInterop": true,                  // Улучшает совместимость с ES-модулями
+    "skipLibCheck": true,                     // Пропускает проверку типов в библиотечных файлах
+    "outDir": "./dist",                       // Директория для скомпилированного кода
+    "rootDir": "./src",                       // Директория с исходным кодом
+    "sourceMap": true,                         // Генерация карт исходников
+    "jsx": "react"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"                            // Исключает директорию node_modules
+  ]
+}
